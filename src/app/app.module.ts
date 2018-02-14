@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {TodoDataService} from './todo-data.service';
 import { HttpModule } from '@angular/http';
-
+import { TodoFilterPipe } from './shared/todo-filter.pipe';
 
 import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodoFilterPipe
   ],
   imports: [
     BrowserModule,

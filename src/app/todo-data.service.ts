@@ -6,7 +6,6 @@ export class TodoDataService {
 
   lastId: number = 0;
   todos: Todo[] = [];
-  filterTodo: Todo[] = [];
   constructor() {};
   todosCompletLength = 0;
 
@@ -59,10 +58,10 @@ export class TodoDataService {
       return this.todos
   }
 
-  // getactive(){
-  //  return this.todos
+  getactive(){
+  //  this.filterTodo = this.todos
   //   .filter(todo => todo.complete == false)
-  // }
+  }
 
   // showCompletedLength(): TodoDataService{
   //   this.todosCompletLength = this.todos

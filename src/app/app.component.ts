@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TodoDataService } from './todo-data.service';
-import { Todo } from './todo'
+import { Todo } from './todo';
+//import { filter } from './shared/todo-filter.pipe';
 
 
 @Component({
@@ -29,8 +30,8 @@ export class AppComponent {
   }
 
   active(){
-    console.log(this.todoDataService.filterTodo)
-    return this.todoDataService.filterTodo = this.todos.filter(todo => todo.complete == false) 
+    // this.todoDataService.getactive()    
+    // console.log('this', this)
   }
 
   all(){
