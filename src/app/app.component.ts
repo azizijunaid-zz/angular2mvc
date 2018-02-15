@@ -11,8 +11,9 @@ import { Todo } from './todo';
   providers: [TodoDataService]
 })
 export class AppComponent {
-
-  constructor(private todoDataService: TodoDataService){}
+  constructor(private todoDataService: TodoDataService){
+    console.log(todoDataService)
+  }
 
   newTodo: Todo = new Todo();
   addTodo(){
@@ -24,14 +25,14 @@ export class AppComponent {
       this.todoDataService.deleteTodoById(todo.id);
   }
 
-  toggleTodoComplete(todo){
-      this.todoDataService.toggleTodoComplete(todo);
-  //     console.log(this.todoDataService.showCompletedLength());
+  toggleTodoComplete(todo, params){
+    !params && this.todoDataService.toggleTodoComplete(todo);
   }
 
-  active(){
+  active(bool){
     // this.todoDataService.getactive()    
     // console.log('this', this)
+    return !bool;
   }
 
   all(){
