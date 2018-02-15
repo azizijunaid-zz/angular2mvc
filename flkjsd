@@ -1,0 +1,23 @@
+[1mdiff --git a/src/app/app.component.ts b/src/app/app.component.ts[m
+[1mindex efa5563..6c472e3 100644[m
+[1m--- a/src/app/app.component.ts[m
+[1m+++ b/src/app/app.component.ts[m
+[36m@@ -1,6 +1,9 @@[m
+ import { Component } from '@angular/core';[m
+ import { TodoDataService } from './todo-data.service';[m
+ import { Todo } from './todo';[m
+[32m+[m[32mimport { Http } from '@angular/http';[m
+[32m+[m[32mimport { Observable } from 'rxjs/Observable';[m
+[32m+[m[32mimport 'rxjs/add/operator/map';[m
+ //import { filter } from './shared/todo-filter.pipe';[m
+ [m
+ [m
+[36m@@ -12,7 +15,7 @@[m [mimport { Todo } from './todo';[m
+ })[m
+ export class AppComponent {[m
+   constructor(private todoDataService: TodoDataService){[m
+[31m-    console.log(todoDataService)[m
+[32m+[m[41m  [m
+   }[m
+ [m
+   newTodo: Todo = new Todo();[m

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { TodoDataService } from './todo-data.service';
 import { Todo } from './todo';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 //import { filter } from './shared/todo-filter.pipe';
 
 
@@ -12,7 +15,7 @@ import { Todo } from './todo';
 })
 export class AppComponent {
   constructor(private todoDataService: TodoDataService){
-    console.log(todoDataService)
+  
   }
 
   newTodo: Todo = new Todo();
