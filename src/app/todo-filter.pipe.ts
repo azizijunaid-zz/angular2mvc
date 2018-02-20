@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TodoFilterPipe implements PipeTransform {
 
   transform(items: any[], args?: boolean): any {
-    console.log('value', args);
+    //console.log('value', args);
     let data  = items
     if (!items) return [];
    // console.log(items.filter(item => item.complete == false))
