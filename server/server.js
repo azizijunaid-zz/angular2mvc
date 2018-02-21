@@ -1,28 +1,18 @@
+/* imports */
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
-const connectiond = mongoose.connect('mongodb://localhost:27017/tododb');
-const db = mongoose.connection;
-const MongoClient = require('mongodb').MongoClient;
-var database = null;
+const bodyParser = require('body-parser');
+let todoModel = require('./Model/model');
+const connection = mongoose.connect('mongodb://localhost:27017/tododb');
+let todoRoutes = require('./Routes/index');
 
-MongoClient.connect('mongodb://localhost:27017/tododb', function(err, res){
-    if(err){
-        console.log('res', err);
-    }
-    database = res;
-    console.log('data', res);
-})
+/* body-parser */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-//use tododb;
-//db.todo.find({});
+/* routes */
+app.use('/', todoRoutes);
 
-// //console.log('db' ,db)
-// app.get('/', (req, res) => {
-//     //res.send('Hellow World!!!'));
-//     //console.log(db.todo.find({}));
-//    // db.todo.find({});
-// })
-
-
+/* server listening */
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
