@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {TodoDataService} from './todo-data.service';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 //import { TodoFilterPipe } from './shared/todo-filter.pipe';
 import { TodoFilterPipe } from './todo-filter.pipe';
 
@@ -18,7 +18,8 @@ import { Todo } from './todo';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    JsonpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

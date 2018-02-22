@@ -2,50 +2,26 @@ const express = require('express')
 const app = express();
 const routes = require('express').Router();
 let todoModel = require('../Model/model');
+let controller = require('../controller/controller');
 
-
-routes.get('/', (req, res) => {
-    todoModel.find({}).then((data, error) => {
-        error ? res.json(error.message) : res.json(data);
-    })
-});
+/* get all todos */
+routes.get('/', controller.getAll);
 
 /* create todo */
-routes.post('/createtodo', (req, res) => { 
-    req.body['createdAt'] = Date.now();
-    let todo = new todoModel(req.body);
-    todo.save((error, result) => {
-        error ? res.json(error.message) : res.json(result);
-    });
-})
+routes.post('/createtodo', controller.createTodo);
+
 
 /* gettodobyId get the specific todo by id */
-routes.get('/gettodobyId/:id', (req, res) => {
-    todoModel.findById({'_id': req.params.id}, (err, doc) => {
-        err ? res.json(err.message = 'id not found') : res.json(doc);
-    });
-})
+routes.get('/gettodobyId/:id', controller.getTodoById);
 
 
 /* toggle completed*/
-routes.put('/toggleCompleted/:id', (req, res) => {
-    todoModel.findByIdAndUpdate({_id: req.params.id}, {$set: req.body} , {}, (err, result)=>{
-        res.json("record updated successfully!");
-    });
-})
+routes.put('/toggleCompleted/:id', controller.toggleCompleted);
 
 /* delete the specific record by id*/
-routes.delete('/removetodobyId/:id', (req, res) => {
-    todoModel.findByIdAndRemove({_id: req.params.id}, (err, result)=>{
-        err ? res.json(err.message) : res.json(result);
-    });
-})
+routes.delete('/removetodobyId/:id', controller.removeTodoById);
 
 /* delete all the records*/
-routes.delete('/removeAll', (req, res) => {
-    todoModel.remove((err, result)=>{
-        err ? res.json(err.message = 'error while removing') : res.json('successfully removed');
-    });
-})
+routes.delete('/removeAll', controller.removeAll);
   
 module.exports = routes;

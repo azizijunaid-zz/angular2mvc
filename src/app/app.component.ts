@@ -14,22 +14,29 @@ import 'rxjs/add/operator/map';
   providers: [TodoDataService]
 })
 export class AppComponent {
+
+  newTodo: Todo;
+  todos: Todo[] = []
+
   constructor(private todoDataService: TodoDataService){
-  
+    this.getTodos();
+    this.newTodo = {title:'', complete: false}
   }
 
-  newTodo: Todo = new Todo();
   addTodo(){
-      this.todoDataService.addTodo(this.newTodo);
-      this.newTodo = new Todo();
+      this.todoDataService.addTodo(this.newTodo).then( todos => {
+          this.todos.push(todos);
+      });
+      this.newTodo = {title:'', complete: false}
   }
 
   removeTodo(todo){
-      this.todoDataService.deleteTodoById(todo.id);
+      this.todoDataService.deleteTodoById(todo);
+      this.todos.splice(todo, 1);
   }
 
   toggleTodoComplete(todo, params){
-    !params && this.todoDataService.toggleTodoComplete(todo);
+      this.todoDataService.toggleTodoComplete(todo);
   }
 
   active(bool){
@@ -48,8 +55,19 @@ export class AppComponent {
     this.todoDataService.clearTodoCOmplete();
   }
 
-  get todos() {
-      return this.todoDataService.getAllTodos();
+
+  // .subscribe(
+  //   res => {
+  //     this.todos =;
+  //   },
+  //   err => {
+  //       console.log('fetch data error', err)
+  //   });
+  getTodos(){
+     this.todoDataService.getAllTodos().then( todos => {
+          this.todos = todos;
+      })
+      
   }
   
 }

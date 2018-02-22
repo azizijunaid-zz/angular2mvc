@@ -3,14 +3,14 @@
 <h1>Todos</h1>
     <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
   </header>
-
+  
   <section class="main" *ngIf="todos.length > 0">
     <ul class="todo-list">
       <li *ngFor="let todo of todos | todoFilter:params" [class.completed]="todo.complete">
         <div class="view">
           <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo, params)" [checked]="todo.complete">
           <label>{{todo.title}}</label>
-          <button class="destroy" (click)="removeTodo(todo)"></button>
+          <button class="destroy" (click)="removeTodo(todo._id)"></button>
         </div>
       </li>
     </ul>
