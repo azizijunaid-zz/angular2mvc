@@ -16,9 +16,9 @@ exports.createTodo = (req, res) => {
     });
 }
 
-exports.getTodoById = (req, res) => {
-    todoModel.findById({'_id': req.params.id}, (err, doc) => {
-        err ? res.json(err.message = 'id not found') : res.json(doc);
+exports.updateTodo = (req, res) => {
+    todoModel.findByIdAndUpdate({'_id': req.params.id}, {$set: req.body} , {}, (err, result)=>{
+        res.json("record updated successfully!");
     });
 }
 
@@ -37,6 +37,14 @@ exports.removeTodoById = (req, res) => {
 
 exports.removeAll = (req, res) => {
     todoModel.remove((err, result)=>{
-        err ? res.json(err.message = 'error while removing') : res.json('successfully removed');
+       return err ? res.json(err.message = 'error while removing') : res.json('successfully removed');
     });
+}
+
+exports.clearCompletedTodos = (req, res) => {
+    console.log('chala...')
+    console.log('req params', req.body)
+    todoModel.deleteMany({_id: { $in: req.body}}, (err) => {
+       return err ? res.json(err.message) : res.json('successfully removed')
+    })
 }

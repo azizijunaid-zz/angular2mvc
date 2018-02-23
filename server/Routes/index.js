@@ -12,7 +12,7 @@ routes.post('/createtodo', controller.createTodo);
 
 
 /* gettodobyId get the specific todo by id */
-routes.get('/gettodobyId/:id', controller.getTodoById);
+routes.put('/updateTodo/:id', controller.updateTodo);
 
 
 /* toggle completed*/
@@ -20,6 +20,10 @@ routes.put('/toggleCompleted/:id', controller.toggleCompleted);
 
 /* delete the specific record by id*/
 routes.delete('/removetodobyId/:id', controller.removeTodoById);
+
+/* clear complete todos */
+
+routes.delete('/clearCompletedTodos', controller.clearCompletedTodos)
 
 /* delete all the records*/
 routes.delete('/removeAll', controller.removeAll);

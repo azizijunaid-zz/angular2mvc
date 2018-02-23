@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TodoDataService {
@@ -55,9 +56,17 @@ export class TodoDataService {
       .catch(err => console.log(err));  
   }
 
-  clearTodoCOmplete(){
-    return this.todos =  this.todos
-    .filter(todo=> !todo.complete )
+  clearTodoCOmplete(ids){
+    //clear whose complete is true;
+    // return this.todos =  this.todos
+    // .filter(todo=> !todo.complete )
+    console.log('janay se pehle', ids);
+    var url  = this.baseUrl + '/clearCompletedTodos';   
+      return this.http.delete(url, new RequestOptions({
+        body: ids
+      }))
+      .toPromise()
+      .catch(err => console.log(err));  
   }
 
  
@@ -69,7 +78,6 @@ export class TodoDataService {
 
   getAllTodos(): Promise<Todo[]>{
         let url = 'http://localhost:3000/';
-       // this.http.get(url).toPromise().then()
         return this.http.get(url)
                    .toPromise()
                    .then((response =>{
@@ -90,5 +98,15 @@ export class TodoDataService {
   //   .filter(todo=> !todo.complete).length
   //   return this
   // }
+
+  updateTodo(todo: Todo, id: number) {
+    //this.http.patch(this.baseUrl + 'update')
+    //console.log('todo', todo);
+    var url  = this.baseUrl + '/updateTodo/' + id; 
+    console.log('url', url);
+      return this.http.put(url, todo)
+      .toPromise()
+      .catch(err => console.log(err));  
+  }
 
 }
